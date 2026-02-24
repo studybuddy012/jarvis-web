@@ -1,0 +1,362 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ================= GLOBAL ================= */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at center, #0f172a, #020617);
+    color: white;
+}
+
+/* ================= LAYOUT ================= */
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ================= MOBILE HEADER ================= */
+
+.mobile-header {
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Title center */
+}
+
+.menu-btn {
+    position: absolute;
+    left: 15px;   /* TOP LEFT */
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* ================= LEFT PANEL ================= */
+
+.left-panel {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100vh;
+    background: #0f172a;
+    padding: 20px;
+    overflow-y: auto;
+    transition: 0.3s ease;
+    z-index: 1000;
+}
+
+.left-panel.active {
+    left: 0;
+}
+
+.left-panel h2,
+.left-panel h3 {
+    color: #3b82f6;
+    margin: 10px 0;
+}
+
+.left-panel button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(30,41,59,0.8);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.left-panel button:hover {
+    background: #1e3a8a;
+}
+
+/* ================= OVERLAY ================= */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 900;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ================= CENTER PANEL ================= */
+
+.center-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* ================= ARC REACTOR ================= */
+
+.arc-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 30px 0;
+}
+
+.arc-outer,
+.arc-middle {
+    position: absolute;
+    border-radius: 50%;
+    border: 6px solid transparent;
+}
+
+.arc-outer {
+    width: 180px;
+    height: 180px;
+    border-top: 6px solid #3b82f6;
+    border-right: 6px solid #3b82f6;
+    animation: spin 4s linear infinite;
+}
+
+.arc-middle {
+    width: 120px;
+    height: 120px;
+    top: 30px;
+    left: 30px;
+    border-bottom: 6px solid #60a5fa;
+    border-left: 6px solid #60a5fa;
+    animation: spinReverse 3s linear infinite;
+}
+
+.arc-inner {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 55px;
+    left: 55px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #3b82f6, #1e3a8a);
+    box-shadow: 0 0 40px #3b82f6;
+}
+
+/* Pulse Animation */
+
+.arc-inner.pulse {
+    animation: reactorPulse 0.6s ease-out;
+}
+
+@keyframes reactorPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 40px #3b82f6;
+    }
+    50% {
+        transform: scale(1.25);
+        box-shadow: 0 0 90px #3b82f6;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 40px #3b82f6;
+    }
+}
+
+/* ================= COMMAND ================= */
+
+.command-wrapper {
+    position: relative;
+}
+
+.command-box {
+    display: flex;
+    gap: 10px;
+}
+
+.command-box input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(30,41,59,0.8);
+    color: white;
+    width: 200px;
+}
+
+.command-box button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+}
+
+.command-box button:hover {
+    background: #2563eb;
+}
+
+/* Suggestions */
+
+.suggestions {
+    position: absolute;
+    top: 45px;
+    width: 200px;
+    background: #0f172a;
+    border-radius: 8px;
+    display: none;
+    max-height: 150px;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 2000;
+}
+
+.suggestions div {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.suggestions div:hover,
+.suggestions .active {
+    background: #1e3a8a;
+}
+
+/* ================= RIGHT PANEL ================= */
+
+.right-panel {
+    width: 100%;
+    padding: 20px;
+}
+
+/* Progress Bars */
+
+.progress {
+    width: 100%;
+    height: 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 8px 0 15px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #3b82f6;
+}
+
+/* Weather Card */
+
+.weather-card {
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    text-align: center;
+}
+
+/* ================= DESKTOP ================= */
+
+@media (min-width: 992px) {
+
+    html, body {
+        overflow: hidden;  /* No page scroll */
+    }
+
+    .layout {
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    .mobile-header {
+        display: none;
+    }
+
+    .left-panel {
+        position: relative;
+        left: 0;
+        height: 100vh;
+    }
+
+    .center-panel {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .right-panel {
+        width: 300px;
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 991px) {
+
+    html, body {
+        overflow-y: auto;
+    }
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .right-panel {
+        width: 100%;
+    }
+    .desktop-title {
+        display: block;
+    }
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+.desktop-title {
+    display: block;
+}
+.mobile-header {
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
+.mobile-header h2 {
+    text-align: center;
+    line-height: 60px;
+    margin: 0;
+}
+
+.menu-btn {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px;
+    cursor: pointer;
+}
+/* LISTENING MODE EFFECT */
+.arc-middle.listening {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}

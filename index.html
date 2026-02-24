@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jarvis Control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- LEFT DRAWER -->
+    <div class="left-panel" id="drawer">
+        <h2>Controls</h2>
+
+        <h3>🎵 Media</h3>
+        <button onclick="sendCommand('PLAY_PAUSE')">Play / Pause</button>
+        <button onclick="sendCommand('NEXT')">Next</button>
+        <button onclick="sendCommand('PREV')">Previous</button>
+
+        <h3>🔊 Volume</h3>
+        <button onclick="sendCommand('VOL_UP')">Volume +</button>
+        <button onclick="sendCommand('VOL_DOWN')">Volume -</button>
+        <button onclick="sendCommand('MUTE')">Mute</button>
+
+        <h3>🖱 Control</h3>
+        <button onclick="sendCommand('AIR_MOUSE_ON')">Air Mouse ON</button>
+        <button onclick="sendCommand('AIR_MOUSE_OFF')">Air Mouse OFF</button>
+
+        <h3>🌤 System</h3>
+        <button onclick="sendCommand('WEATHER')">Weather</button>
+        <button onclick="sendCommand('SCROLL_ON')">Scroll ON</button>
+        <button onclick="sendCommand('SCROLL_OFF')">Scroll OFF</button>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- CENTER PANEL -->
+    <div class="center-panel">
+
+        <div class="mobile-header">
+            <div class="menu-btn" onclick="toggleMenu()">☰</div>
+            <!-- <h2>JARVIS</h2> -->
+        </div>
+
+        <h1 class="desktop-title">JARVIS</h1>
+
+        <div class="arc-container">
+            <div class="arc-outer"></div>
+            <div class="arc-middle"></div>
+            <div class="arc-inner"></div>
+        </div>
+
+        <div class="command-wrapper">
+            <div class="command-box">
+                <input type="text" id="commandInput" placeholder="Type Command...">
+                <button onclick="sendTypedCommand()">EXECUTE</button>
+            </div>
+            <div id="suggestions" class="suggestions"></div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+        <h2>System Stats</h2>
+
+        <p>CPU</p>
+        <div class="progress">
+            <div id="cpuBar" class="progress-fill"></div>
+        </div>
+
+        <p>RAM</p>
+        <div class="progress">
+            <div id="ramBar" class="progress-fill"></div>
+        </div>
+
+        <p>Status: <span id="pcStatus">Online</span></p>
+
+        <h2>Weather</h2>
+        <div class="weather-card">
+            <p id="weatherTemp">--°C</p>
+            <p id="weatherDesc">Loading...</p>
+            <p id="weatherCity">Bhuj</p>
+        </div>
+    </div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
