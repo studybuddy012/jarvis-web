@@ -641,6 +641,10 @@ function processVoiceCommand(text) {
 
     if (text.includes("weather") || text.includes("mausam"))
         return sendCommand("WEATHER");
+    
+     if (text.includes("shutdown") || text.includes("turn off"))
+        return sendCommand("shutdown");
 
     console.log("No matching command");
+
 }
